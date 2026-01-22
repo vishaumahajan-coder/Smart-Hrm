@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-win-blue: #0055E5;
+  --color-win-bg: #EBE9D8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #EBE9D8;
+}
+
+/* Classic Button Feel */
+.btn-classic {
+  @apply bg-white border-b-2 border-r-2 border-gray-600 active:border-t-2 active:border-l-2 active:border-b-0 active:border-r-0 transition-none;
+}
+
+/* Custom scrollbar for classic look */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #fff;
+  box-shadow: inset 1px 1px 0 #808080;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d0c8;
+  border: 1px solid #fff;
+  box-shadow: inset -1px -1px 0 #808080, 1px 1px 0 #fff;
+}
