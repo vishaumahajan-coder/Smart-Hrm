@@ -10,12 +10,13 @@ import Payment from './entries/Payment';
 import LedgerReport from './reports/LedgerReport';
 import TrialBalance from './reports/TrialBalance';
 import ProfitLoss from './reports/ProfitLoss';
+import CompanySettings from './pages/CompanySettings';
 
 const AppRoutes = ({ onLogout }) => {
     return (
         <Routes>
             <Route element={<MainLayout onLogout={onLogout} />}>
-                <Route path="/" element={<Navigate to="/masters/parties" replace />} />
+                <Route path="/" element={<Navigate to="/company/setup" replace />} />
                 <Route path="/masters/parties" element={<Parties />} />
                 <Route path="/masters/items" element={<Items />} />
                 <Route path="/masters/ledgers" element={<Ledgers />} />
@@ -25,6 +26,7 @@ const AppRoutes = ({ onLogout }) => {
                 <Route path="/reports/ledger" element={<LedgerReport />} />
                 <Route path="/reports/trial-balance" element={<TrialBalance />} />
                 <Route path="/reports/profit-loss" element={<ProfitLoss />} />
+                <Route path="/company/setup" element={<CompanySettings />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

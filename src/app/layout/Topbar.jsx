@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Monitor, Settings, FileText, Printer, Search,
     CheckSquare, Folder, Layout, LogOut, X,
-    ChevronDown, Save, Plus, HelpCircle
+    ChevronDown, Save, Plus, HelpCircle, ChevronRight
 } from 'lucide-react';
 
 const Topbar = ({ onLogout, onSelectCompany, companyName }) => {
     const [activeMenu, setActiveMenu] = useState(null);
+    const [activeSubMenu, setActiveSubMenu] = useState(null);
+    const navigate = useNavigate();
 
     const menus = [
-        { name: 'System', items: ['Select Company', 'Company Setup', 'Customized Modules', 'Log Out', 'Quit'] },
+        {
+            name: 'System',
+            items: [
+                { label: 'Select Company', action: 'select_company' },
+                {
+                    label: 'Company Setup',
+                    subItems: [
+                        { label: 'General Setup', action: 'company_general_setup' },
+                        { label: 'Additional Setup Options', action: 'company_additional_setup' }
+                    ]
+                },
+                { label: 'Customized Modules', action: 'customized_modules' },
+                { label: 'Log Out', action: 'logout' },
+                { label: 'Quit', action: 'quit' }
+            ]
+        },
         { name: 'Processing', items: [] },
         { name: 'Files', items: [] },
         { name: 'Transactions', items: [] },
@@ -19,6 +37,17 @@ const Topbar = ({ onLogout, onSelectCompany, companyName }) => {
         { name: 'Window', items: [] },
         { name: 'Report Format', items: [] },
     ];
+
+    const handleMenuClick = (item) => {
+        if (item.subItems) return; // Handled by hover mostly, or click to expand if mobile
+
+        if (item.action === 'select_company') onSelectCompany();
+        if (item.action === 'logout' || item.action === 'quit') onLogout();
+        if (item.action === 'company_general_setup') navigate('/company/setup');
+
+        setActiveMenu(null);
+        setActiveSubMenu(null);
+    };
 
     return (
         <div className="flex flex-col w-full font-sans select-none">
@@ -41,7 +70,9 @@ const Topbar = ({ onLogout, onSelectCompany, companyName }) => {
                     <div
                         key={menu.name}
                         className="relative"
-                        onMouseEnter={() => activeMenu && setActiveMenu(menu.name)}
+                        onMouseEnter={() => {
+                            if (activeMenu) setActiveMenu(menu.name);
+                        }}
                     >
                         <button
                             onClick={() => setActiveMenu(activeMenu === menu.name ? null : menu.name)}
@@ -51,21 +82,38 @@ const Topbar = ({ onLogout, onSelectCompany, companyName }) => {
                             {menu.name}
                         </button>
 
-                        {activeMenu === menu.name && menu.items.length > 0 && (
-                            <div className="absolute top-full left-0 bg-[#EBE9D8] border border-gray-500 shadow-md py-1 min-w-[180px] z-[100]">
-                                {menu.items.map((item) => (
-                                    <button
-                                        key={item}
-                                        onClick={() => {
-                                            if (item === 'Select Company') onSelectCompany();
-                                            if (item === 'Log Out' || item === 'Quit') onLogout();
-                                            setActiveMenu(null);
-                                        }}
-                                        className="w-full text-left px-4 py-1.5 text-xs hover:bg-[#316AC5] hover:text-white flex justify-between group"
+                        {activeMenu === menu.name && menu.items && menu.items.length > 0 && (
+                            <div className="absolute top-full left-0 bg-[#EBE9D8] border border-gray-500 shadow-md py-1 min-w-[200px] z-[100]">
+                                {menu.items.map((item, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="relative group"
+                                        onMouseEnter={() => setActiveSubMenu(item.label)}
                                     >
-                                        <span>{item}</span>
-                                        {item === 'Quit' && <span className="text-gray-500 group-hover:text-blue-100 ml-4">CTRL+Q</span>}
-                                    </button>
+                                        <button
+                                            onClick={() => handleMenuClick(item)}
+                                            className="w-full text-left px-4 py-1.5 text-xs hover:bg-[#316AC5] hover:text-white flex justify-between items-center"
+                                        >
+                                            <span>{item.label}</span>
+                                            {item.subItems && <ChevronRight size={12} />}
+                                            {item.label === 'Quit' && <span className="text-gray-500 group-hover:text-blue-100 ml-4">CTRL+Q</span>}
+                                        </button>
+
+                                        {/* Nested Submenu */}
+                                        {item.subItems && activeSubMenu === item.label && (
+                                            <div className="absolute top-0 left-full bg-[#EBE9D8] border border-gray-500 shadow-md py-1 min-w-[200px] z-[101]">
+                                                {item.subItems.map((subItem, subIdx) => (
+                                                    <button
+                                                        key={subIdx}
+                                                        onClick={() => handleMenuClick(subItem)}
+                                                        className="w-full text-left px-4 py-1.5 text-xs hover:bg-[#316AC5] hover:text-white"
+                                                    >
+                                                        {subItem.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         )}
