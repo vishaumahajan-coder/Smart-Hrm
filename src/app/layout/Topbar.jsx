@@ -49,8 +49,17 @@ const Topbar = ({ onLogout, onSelectCompany, companyName, isCompanySelected = fa
             ]
         },
         {
-            name: 'Processing',
+            name: 'Finance',
             items: [
+                {
+                    label: 'Payslips',
+                    subItems: [
+                        { label: 'Generate & Manage', action: 'payslip_manage' },
+                        { label: 'My Payslips', action: 'payslip_my' },
+                        { label: 'Email Payslips', action: 'email_p24' }
+                    ]
+                },
+                { type: 'separator' },
                 {
                     label: 'Transaction Entry',
                     subItems: [
@@ -108,21 +117,6 @@ const Topbar = ({ onLogout, onSelectCompany, companyName, isCompanySelected = fa
             ]
         },
         {
-            name: 'Jamaica Statutory',
-            items: [
-                { label: 'P45 Report', action: 'stat_p45' },
-                { type: 'separator' },
-                { label: 'NIS / NHT Returns', action: 'stat_nis_nht' },
-                { type: 'separator' },
-                { label: 'S01 Monthly Return', action: 'stat_s01' },
-                { label: 'S02 Annual Return', action: 'stat_s02' },
-                { type: 'separator' },
-                { label: 'Pension Reports', action: 'stat_pension' },
-                { type: 'separator' },
-                { label: 'Tax Website Upload Files', action: 'stat_tax_upload' }
-            ]
-        },
-        {
             name: 'HRM',
             items: [
                 { label: 'Employee Management', action: 'employee_management' },
@@ -139,6 +133,20 @@ const Topbar = ({ onLogout, onSelectCompany, companyName, isCompanySelected = fa
         {
             name: 'Reports',
             items: [
+                { label: 'Regulatory Reports Hub', action: 'reports_hub' },
+                { type: 'separator' },
+                {
+                    label: 'Statutory Returns',
+                    subItems: [
+                        { label: 'P45 Report', action: 'stat_p45' },
+                        { label: 'NIS / NHT Returns', action: 'stat_nis_nht' },
+                        { label: 'S01 Monthly Return', action: 'stat_s01' },
+                        { label: 'S02 Annual Return', action: 'stat_s02' },
+                        { label: 'Pension Reports', action: 'stat_pension' },
+                        { label: 'Tax Website Upload Files', action: 'stat_tax_upload' }
+                    ]
+                },
+                { type: 'separator' },
                 { label: 'Employee Report', action: 'employee_report' },
                 { type: 'separator' },
                 { label: 'Attendance Report', action: 'attendance_report' },
@@ -216,6 +224,9 @@ const Topbar = ({ onLogout, onSelectCompany, companyName, isCompanySelected = fa
                 'bank_cibc': '/banking/ncb',   // Placeholder
                 'cheque_batch': '/processing/cheque-printing',
                 'email_p24': '/reports/email-p24',
+                'payslip_manage': '/payslips/manage',
+                'payslip_my': '/employee/payslips',
+                'reports_hub': '/reports/hub',
             };
 
             const path = navigateTo[item.action];
@@ -280,7 +291,7 @@ const Topbar = ({ onLogout, onSelectCompany, companyName, isCompanySelected = fa
                         </button>
 
                         {activeMenu === menu.name && menu.items && menu.items.length > 0 && (
-                            <div className={`absolute top-full left-0 bg-[#EBE9D8] border border-gray-500 shadow-md py-1 min-w-[200px] z-[100] ${menu.name === 'Processing' || menu.name === 'System' ? '' : 'max-h-[85vh] overflow-y-auto'}`}>
+                            <div className={`absolute top-full left-0 bg-[#EBE9D8] border border-gray-500 shadow-md py-1 min-w-[200px] z-[100] ${['System', 'Finance', 'Reports'].includes(menu.name) ? '' : 'max-h-[85vh] overflow-y-auto'}`}>
                                 {menu.items.map((item, idx) => (
                                     item.type === 'separator' ? (
                                         <div key={idx} className="border-t border-gray-400 my-1"></div>

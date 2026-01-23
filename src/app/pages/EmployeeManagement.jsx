@@ -21,8 +21,12 @@ const EmployeeManagement = () => {
         trn: '', // Tax Registration Number (Used for payslip password)
         email: '',
         phone: '',
-        address: '',
+        street: '',
+        city: '',
+        parish: '',
+        country: 'Jamaica',
         emergencyName: '',
+        emergencyRelationship: '',
         emergencyPhone: '',
         department: '',
         designation: '',
@@ -33,12 +37,13 @@ const EmployeeManagement = () => {
         paymentMethod: 'Bank Transfer',
         bankAccount: '',
         // Additions
+        travelAllowance: '0',
         lunchAllowance: '0',
-        transportAllowance: '0',
         bonus: '0',
         // Deductions
         healthInsurance: '0',
         lifeInsurance: '0',
+        staffLoan: '0',
         pensionContribution: '0',
         nisExempt: false,
         nhtExempt: false,
@@ -84,11 +89,12 @@ const EmployeeManagement = () => {
 
     const handleNew = () => {
         setFormData({
-            employeeId: '', firstName: '', lastName: '', trn: '', email: '', phone: '', address: '',
-            emergencyName: '', emergencyPhone: '', department: '', designation: '', joinDate: '',
+            employeeId: '', firstName: '', lastName: '', trn: '', email: '', phone: '',
+            street: '', city: '', parish: '', country: 'Jamaica',
+            emergencyName: '', emergencyRelationship: '', emergencyPhone: '', department: '', designation: '', joinDate: '',
             status: 'Active', baseSalary: '0', paymentMethod: 'Bank Transfer', bankAccount: '',
-            lunchAllowance: '0', transportAllowance: '0', bonus: '0', healthInsurance: '0',
-            lifeInsurance: '0', pensionContribution: '0', nisExempt: false, nhtExempt: false,
+            lunchAllowance: '0', travelAllowance: '0', bonus: '0', healthInsurance: '0',
+            lifeInsurance: '0', staffLoan: '0', pensionContribution: '0', nisExempt: false, nhtExempt: false,
         });
         setSelectedRow(null);
         setIsEditing(true);
@@ -194,8 +200,33 @@ const EmployeeManagement = () => {
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Email Address</label>
                                         <input type="email" value={formData.email} onChange={(e) => handleInputChange('email', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 text-blue-800 font-bold" />
 
-                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Home Address</label>
-                                        <textarea rows="2" value={formData.address} onChange={(e) => handleInputChange('address', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 text-blue-800 font-bold text-[10px]"></textarea>
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Street Address</label>
+                                        <textarea rows="2" value={formData.street} onChange={(e) => handleInputChange('street', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 text-blue-800 font-bold text-[10px]"></textarea>
+
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">City / Town</label>
+                                        <input type="text" value={formData.city} onChange={(e) => handleInputChange('city', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 text-blue-800 font-bold" />
+
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Parish</label>
+                                        <select value={formData.parish} onChange={(e) => handleInputChange('parish', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold text-[10px]">
+                                            <option value="">Select Parish</option>
+                                            <option value="Kingston">Kingston</option>
+                                            <option value="St. Andrew">St. Andrew</option>
+                                            <option value="St. Catherine">St. Catherine</option>
+                                            <option value="Clarendon">Clarendon</option>
+                                            <option value="Manchester">Manchester</option>
+                                            <option value="St. Elizabeth">St. Elizabeth</option>
+                                            <option value="Westmoreland">Westmoreland</option>
+                                            <option value="Hanover">Hanover</option>
+                                            <option value="St. James">St. James</option>
+                                            <option value="Trelawny">Trelawny</option>
+                                            <option value="St. Ann">St. Ann</option>
+                                            <option value="St. Mary">St. Mary</option>
+                                            <option value="Portland">Portland</option>
+                                            <option value="St. Thomas">St. Thomas</option>
+                                        </select>
+
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Country</label>
+                                        <input type="text" value={formData.country} readOnly className="p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold cursor-not-allowed" />
                                     </div>
                                 </div>
                             )}
@@ -261,8 +292,8 @@ const EmployeeManagement = () => {
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Lunch Allowance</label>
                                         <input type="number" value={formData.lunchAllowance} onChange={(e) => handleInputChange('lunchAllowance', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
 
-                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Transport Allowance</label>
-                                        <input type="number" value={formData.transportAllowance} onChange={(e) => handleInputChange('transportAllowance', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Travel Allowance</label>
+                                        <input type="number" value={formData.travelAllowance} onChange={(e) => handleInputChange('travelAllowance', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
 
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Performance Bonus</label>
                                         <input type="number" value={formData.bonus} onChange={(e) => handleInputChange('bonus', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
@@ -282,6 +313,9 @@ const EmployeeManagement = () => {
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Life Insurance</label>
                                         <input type="number" value={formData.lifeInsurance} onChange={(e) => handleInputChange('lifeInsurance', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
 
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Staff Loan</label>
+                                        <input type="number" value={formData.staffLoan} onChange={(e) => handleInputChange('staffLoan', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
+
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Pension (EE %)</label>
                                         <input type="number" value={formData.pensionContribution} onChange={(e) => handleInputChange('pensionContribution', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
 
@@ -296,6 +330,13 @@ const EmployeeManagement = () => {
                                             </label>
                                         </div>
                                     </div>
+                                    <div className="col-span-2 mt-4 bg-yellow-50 border border-yellow-200 p-2 rounded flex items-center gap-2">
+                                        <div className="w-1 h-8 bg-blue-500"></div>
+                                        <p className="text-[9px] text-gray-600 font-bold italic">
+                                            Values entered here are automatically included in the monthly salary calculation.
+                                            Changes affect the next payroll cycle.
+                                        </p>
+                                    </div>
                                 </div>
                             )}
 
@@ -307,6 +348,9 @@ const EmployeeManagement = () => {
                                     <div className="grid grid-cols-[100px_1fr] gap-3 items-center">
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Contact Name</label>
                                         <input type="text" value={formData.emergencyName} onChange={(e) => handleInputChange('emergencyName', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
+
+                                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Relation</label>
+                                        <input type="text" value={formData.emergencyRelationship} onChange={(e) => handleInputChange('emergencyRelationship', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
 
                                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-tighter text-right">Primary Phone</label>
                                         <input type="text" value={formData.emergencyPhone} onChange={(e) => handleInputChange('emergencyPhone', e.target.value)} className="p-1 border border-gray-300 bg-gray-50 font-bold" />
@@ -321,7 +365,7 @@ const EmployeeManagement = () => {
                             <div className="flex flex-col">
                                 <span className="text-[8px] font-bold uppercase text-gray-400">Estimated Monthly Net</span>
                                 <span className="text-sm font-black text-blue-900 italic">$
-                                    {(Number(formData.baseSalary) + Number(formData.lunchAllowance) + Number(formData.transportAllowance) - Number(formData.healthInsurance) - Number(formData.lifeInsurance)).toLocaleString()}
+                                    {(Number(formData.baseSalary) + Number(formData.lunchAllowance) + Number(formData.travelAllowance) - Number(formData.healthInsurance) - Number(formData.lifeInsurance) - Number(formData.staffLoan)).toLocaleString()}
                                 </span>
                             </div>
                             <div className="flex gap-2">

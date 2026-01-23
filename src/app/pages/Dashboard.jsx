@@ -22,7 +22,7 @@ const Dashboard = () => {
         { label: 'Process Payroll', icon: <Activity />, path: '/processing/payroll-calculation', desc: 'Run Jamaica Tax Engine' },
         { label: 'New Employee', icon: <Plus />, path: '/employees', desc: 'Add Staff to Registry' },
         { label: 'Electronic Transfer', icon: <Landmark />, path: '/banking/bns', desc: 'Bank Advice Files' },
-        { label: 'Batch Email Slips', icon: <Mail />, path: '/reports/email-p24', desc: 'Password Protected Slips' },
+        { label: 'My Payslips', icon: <FileText />, path: '/employee/payslips', desc: 'View History' },
         { label: 'Statutory Returns', icon: <FileText />, path: '/statutory/s01', desc: 'P45, NIS, NHT, S01' },
         { label: 'Cheque Printing', icon: <CreditCard />, path: '/processing/cheque-printing', desc: 'Physical Payment Slips' },
     ];

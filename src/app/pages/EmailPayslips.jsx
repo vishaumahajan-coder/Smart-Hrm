@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Mail, ShieldLock, Send, Search, CheckCircle2,
+    Mail, ShieldCheck, Send, Search, CheckCircle2,
     Clock, AlertTriangle, FileText, Download, LogOut,
     Eye, Trash2
 } from 'lucide-react';
@@ -61,7 +61,7 @@ const EmailPayslips = () => {
                 {/* Security Advisory */}
                 <div className="bg-blue-900 text-white p-4 rounded shadow-lg flex items-center justify-between border-l-8 border-blue-400">
                     <div className="flex items-center gap-4">
-                        <ShieldLock size={32} className="text-blue-300" />
+                        <ShieldCheck size={32} className="text-blue-300" />
                         <div>
                             <h3 className="text-sm font-black uppercase italic tracking-widest">Enhanced Identity Protection</h3>
                             <p className="text-[10px] font-bold text-blue-200">All PDF attachments are AES-256 encrypted using the employee's TRN as the decryption key.</p>
@@ -102,7 +102,7 @@ const EmailPayslips = () => {
                                             <td className="p-3 border-r border-gray-200 text-blue-700 italic underline">{emp.email}</td>
                                             <td className="p-3 border-r border-gray-200">
                                                 <div className="flex items-center gap-2">
-                                                    <ShieldLock size={12} className="text-gray-400" />
+                                                    <ShieldCheck size={12} className="text-gray-400" />
                                                     <span className="text-gray-400 text-[10px]">TRN: XXX-XX-{emp.trn.slice(-3)}</span>
                                                 </div>
                                             </td>

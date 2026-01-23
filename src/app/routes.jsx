@@ -42,6 +42,9 @@ import JamaicaStatutory from './pages/JamaicaStatutory';
 import BankIntegrations from './pages/BankIntegrations';
 import ChequePrinting from './pages/ChequePrinting';
 import EmailPayslips from './pages/EmailPayslips';
+import PayslipManagement from './pages/PayslipManagement';
+import MyPayslips from './pages/MyPayslips';
+import ReportsHub from './pages/ReportsHub';
 
 const AppRoutes = ({ onLogout }) => {
     return (
@@ -97,7 +100,11 @@ const AppRoutes = ({ onLogout }) => {
                 <Route path="/banking/ncb" element={<BankIntegrations bank="NCB" />} />
                 <Route path="/banking/jn" element={<BankIntegrations bank="JN" />} />
                 <Route path="/banking/jmmb" element={<BankIntegrations bank="JMMB" />} />
+                <Route path="/banking/jmmb" element={<BankIntegrations bank="JMMB" />} />
                 <Route path="/reports/email-p24" element={<EmailPayslips />} />
+                <Route path="/payslips/manage" element={<PayslipManagement />} />
+                <Route path="/employee/payslips" element={<MyPayslips />} />
+                <Route path="/reports/hub" element={<ReportsHub />} />
 
                 {/* Other Menu Routes */}
                 <Route path="/files" element={<FileManager />} />

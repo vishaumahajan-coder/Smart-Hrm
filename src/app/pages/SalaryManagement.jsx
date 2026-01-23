@@ -136,9 +136,9 @@ const SalaryManagement = () => {
                 <div className="flex gap-4 h-full">
                     {/* Left Side - Form Fields */}
                     <div className="flex flex-col gap-4 w-80">
-                        <fieldset className="border border-gray-400 p-3 rounded relative">
-                            <legend className="text-white bg-[#316AC5] px-2 py-0.5 font-bold absolute -top-3 left-2 border border-gray-500">
-                                Salary Information
+                        <fieldset className="border border-blue-200 p-3 rounded relative bg-blue-50/50">
+                            <legend className="text-white bg-blue-600 px-2 py-0.5 font-bold absolute -top-3 left-2 border border-blue-700 shadow-sm text-xs">
+                                Salary Configuration (Auto-Calculated)
                             </legend>
 
                             <div className="grid grid-cols-[120px_1fr] gap-y-3 gap-x-4 items-center mt-2">
@@ -146,81 +146,91 @@ const SalaryManagement = () => {
                                 <input
                                     type="text"
                                     value={formData.employeeId}
-                                    onChange={(e) => handleInputChange('employeeId', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
+                                    readOnly
+                                    className="p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
                                 />
 
                                 <label className="text-gray-700 font-bold text-right">Employee Name</label>
                                 <input
                                     type="text"
                                     value={formData.employeeName}
-                                    onChange={(e) => handleInputChange('employeeName', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
+                                    readOnly
+                                    className="p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
                                 />
 
                                 <label className="text-gray-700 font-bold text-right">Month</label>
-                                <select
+                                <input
+                                    type="text"
                                     value={formData.month}
-                                    onChange={(e) => handleInputChange('month', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    disabled={!isEditing}
-                                >
-                                    {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => (
-                                        <option key={m} value={m}>{m}</option>
-                                    ))}
-                                </select>
+                                    readOnly
+                                    className="p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
+                                />
 
                                 <label className="text-gray-700 font-bold text-right">Year</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={formData.year}
-                                    onChange={(e) => handleInputChange('year', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
+                                    readOnly
+                                    className="p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
                                 />
+
+                                <div className="col-span-2 border-t border-blue-200 my-1"></div>
 
                                 <label className="text-gray-700 font-bold text-right">Basic Salary</label>
-                                <input
-                                    type="number"
-                                    value={formData.basicSalary}
-                                    onChange={(e) => handleInputChange('basicSalary', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
-                                />
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={formData.basicSalary}
+                                        readOnly
+                                        className="w-full p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
+                                    />
+                                    <span className="absolute right-1 top-1 text-[8px] bg-gray-200 text-gray-500 px-1 rounded">LOCKED</span>
+                                </div>
 
                                 <label className="text-gray-700 font-bold text-right">Allowances</label>
-                                <input
-                                    type="number"
-                                    value={formData.allowances}
-                                    onChange={(e) => handleInputChange('allowances', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
-                                />
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={formData.allowances}
+                                        readOnly
+                                        className="w-full p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
+                                    />
+                                    <span className="absolute right-1 top-1 text-[8px] bg-gray-200 text-gray-500 px-1 rounded">HR DATA</span>
+                                </div>
 
                                 <label className="text-gray-700 font-bold text-right">Deductions</label>
-                                <input
-                                    type="number"
-                                    value={formData.deductions}
-                                    onChange={(e) => handleInputChange('deductions', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
-                                    readOnly={!isEditing}
-                                />
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={formData.deductions}
+                                        readOnly
+                                        className="w-full p-1 border border-gray-300 bg-gray-100 text-gray-600 font-bold shadow-inner cursor-not-allowed"
+                                    />
+                                    <span className="absolute right-1 top-1 text-[8px] bg-gray-200 text-gray-500 px-1 rounded">HR DATA</span>
+                                </div>
 
-                                <label className="text-gray-700 font-bold text-right">Net Salary</label>
-                                <input
-                                    type="text"
-                                    value={formData.netSalary}
-                                    readOnly
-                                    className="p-1 border border-gray-400 bg-blue-50 text-blue-800 font-bold shadow-inner"
-                                />
+                                <label className="text-blue-900 font-black text-right">Net Salary</label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={formData.netSalary}
+                                        readOnly
+                                        className="w-full p-1 border border-blue-300 bg-blue-100 text-blue-900 font-black shadow-inner"
+                                    />
+                                    <span className="absolute right-1 top-1 text-[8px] bg-blue-200 text-blue-800 px-1 rounded">AUTO</span>
+                                </div>
 
-                                <label className="text-gray-700 font-bold text-right">Status</label>
+                                <div className="col-span-2 mt-2">
+                                    <p className="text-[9px] text-gray-500 italic text-center border p-1 rounded bg-yellow-50 border-yellow-200">
+                                        <span className="font-bold">Note:</span> Salary is calculated automatically from HR data and shared with Payroll via integration. Manual entry is disabled.
+                                    </p>
+                                </div>
+
+                                <label className="text-gray-700 font-bold text-right mt-2">Status</label>
                                 <select
                                     value={formData.status}
                                     onChange={(e) => handleInputChange('status', e.target.value)}
-                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner"
+                                    className="p-1 border border-gray-400 bg-white text-blue-800 font-bold shadow-inner mt-2"
                                     disabled={!isEditing}
                                 >
                                     <option value="Pending">Pending</option>
@@ -234,7 +244,7 @@ const SalaryManagement = () => {
                     {/* Middle - Action Buttons */}
                     <div className="flex flex-col gap-2 w-20">
                         <button
-                            onClick={() => {/* Search logic */}}
+                            onClick={() => {/* Search logic */ }}
                             className="flex flex-col items-center justify-center p-2 border border-gray-400 border-b-2 border-r-2 border-gray-500 bg-[#E0DCCF] hover:bg-gray-200 active:border-0 active:translate-y-0.5"
                         >
                             <Search className="text-blue-600 mb-1" size={20} />
@@ -304,8 +314,8 @@ const SalaryManagement = () => {
                                             key={record.id}
                                             onClick={() => handleRowClick(record.id)}
                                             className={`cursor-pointer ${selectedRow === record.id
-                                                    ? 'bg-[#316AC5] text-white'
-                                                    : 'odd:bg-blue-50 even:bg-white hover:bg-yellow-100'
+                                                ? 'bg-[#316AC5] text-white'
+                                                : 'odd:bg-blue-50 even:bg-white hover:bg-yellow-100'
                                                 }`}
                                         >
                                             <td className="border-r border-gray-200 p-1.5 font-bold">{record.employeeId}</td>
@@ -327,7 +337,7 @@ const SalaryManagement = () => {
                     <div className="flex flex-col gap-2 w-20">
                         <div className="flex-1"></div>
                         <button
-                            onClick={() => {/* Save logic */}}
+                            onClick={() => {/* Save logic */ }}
                             className="flex flex-col items-center justify-center p-2 border border-gray-400 border-b-2 border-r-2 border-gray-500 bg-[#E0DCCF] hover:bg-gray-200 active:border-0 active:translate-y-0.5"
                         >
                             <Save className="text-blue-600 mb-1" size={20} />
