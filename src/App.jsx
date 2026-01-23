@@ -26,11 +26,14 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col h-screen w-full overflow-hidden bg-[#333333]">
         {/* 1. Global Navbar/Toolbar */}
-        <Topbar
-          onLogout={handleLogout}
-          onSelectCompany={() => setSelectedCompany(null)}
-          companyName={selectedCompany?.name || (isLoggedIn ? 'Awaiting Company' : 'Logon Screen')}
-        />
+        <div className="no-print">
+          <Topbar
+            onLogout={handleLogout}
+            onSelectCompany={() => setSelectedCompany(null)}
+            companyName={selectedCompany?.name || (isLoggedIn ? 'Awaiting Company' : 'Logon Screen')}
+            isCompanySelected={!!selectedCompany}
+          />
+        </div>
 
         {/* 2. Main Content Area with Gear Background */}
         <div className="flex-1 relative overflow-hidden flex items-center justify-center">
@@ -63,7 +66,7 @@ function App() {
         </div>
 
         {/* 3. Global Status Bar */}
-        <div className="bg-[#EBE9D8] border-t border-gray-400 h-6 px-4 flex items-center justify-between text-[10px] text-gray-700 font-bold z-50">
+        <div className="bg-[#EBE9D8] border-t border-gray-400 h-6 px-4 flex items-center justify-between text-[10px] text-gray-700 font-bold z-50 no-print">
           <div className="flex gap-4">
             <span>{isLoggedIn ? 'System Ready' : 'User Verification Required'}</span>
             <span className="border-l border-gray-400 pl-4">Record 1/1</span>
